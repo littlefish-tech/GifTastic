@@ -107,6 +107,9 @@
               //             // result item
               animalImage.attr("src", results[i].images.fixed_height.url);
 
+             
+
+
               //             // Appending the paragraph and personImage we created to the "gifDiv" div we created
               gifDiv.append(p);
               gifDiv.append(animalImage);
@@ -126,6 +129,19 @@
         var animal = $(this).attr("data-name");
         console.log(animal);
         callApi(animal)
+
+      })
+
+      $("#gifs-appear-here").on("click",function() {
+        
+        var state = $(this).attr("data-state");
+              if (state === "still") {
+                $(this).attr("src", $(this).attr("data-still"));
+                $(this).attr("data-state", "animate");
+              } else {
+                $(this).attr("src", $(this).attr("fixed_height"));
+                $(this).attr("data-state", "still");
+              }
 
       })
   //  function displayAnimalInfo() {

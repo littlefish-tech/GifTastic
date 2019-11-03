@@ -63,12 +63,22 @@
 
         console.log("button")
          $("#buttons-view").empty();
+          if ($("#animal-input").val() !== "") {
+          //  console.log("hello")
+        
+        
+
          var animal = $("#animal-input").val().trim();
+         console.log(animal)
          animals.push(animal);
          console.log(animals)
          displayAnimalButtons();
 
+          }   else {
+            displayAnimalButtons();
+          }
       })
+      
 
 
 
@@ -106,6 +116,7 @@
               //             // Giving the image tag an src attribute of a proprty pulled off the
               //             // result item
               animalImage.attr("src", results[i].images.fixed_height.url);
+              console.log(results)
 
               //             // Appending the paragraph and personImage we created to the "gifDiv" div we created
               gifDiv.append(p);
