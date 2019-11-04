@@ -18,7 +18,7 @@
 <body>
   <div class="Container">
     <form id="animal-form">
-      <label for="animal-input">Add an Animal: </label>
+      <label for="animal-input">Add an Animal:   </label>
       <input type="text" id="animal-input">
       <br>
       <!-- <input id="add-animal" type="submit" value="add an Animal"> -->
@@ -102,7 +102,7 @@
             //           // Only taking action if the gif has an appropriate rating
             if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
               //             // Creating a div for the gif
-              var gifDiv = $("<div>");
+              var gifDiv = $("<div class = 'gif'>");
 
               //             // Storing the result item's rating
               var rating = results[i].rating;
@@ -116,14 +116,35 @@
               //             // Giving the image tag an src attribute of a proprty pulled off the
               //             // result item
               animalImage.attr("src", results[i].images.fixed_height.url);
-              console.log(results)
+              animalImage.attr("data-still", results[i].images.fixed_height.url);
+              animalImage.attr("data-state", "still");
+              animalImage.attr("data-animate", results[i].images.original_still.url);
 
-              //             // Appending the paragraph and personImage we created to the "gifDiv" div we created
+              console.log(results)
+              
+
+              //             // Appending the paragraph and  we created to the "gifDiv" div we created
               gifDiv.append(p);
               gifDiv.append(animalImage);
 
               //             // Prepending the gifDiv to the "#gifs-appear-here" div in the HTML
               $("#gifs-appear-here").prepend(gifDiv);
+
+              $(".gif").on("click", function(event) {
+                event.preventDefault();
+
+                var state = $(this).attr("data-state");
+                console.log("hello");
+               
+                if (state === "still") {
+                  $(this).attr("src", $(this).attr("data-animate"));
+                  $(this).attr("data-state", "animate");
+                } else {
+                  $(this).attr("src", $(this).attr("data-still"));
+                  $(this).attr("data-state", "still");
+                }
+              })
+
             }
           }
         })
